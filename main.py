@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from api.router import router as api_router
 
 # whitelist alloed routes
 origins = [
@@ -24,3 +25,7 @@ app.add_middleware(
 @app.get("/")
 async def check_status():
     return {"message": "Without sacrifice, there is no victory"}
+
+
+# Include the API router
+app.include_router(api_router, prefix="/api/v1")
