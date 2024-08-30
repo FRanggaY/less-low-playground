@@ -1,7 +1,5 @@
-import json
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from fastapi.responses import JSONResponse
-from sqlalchemy.orm import Session
 
 router = APIRouter()
 
