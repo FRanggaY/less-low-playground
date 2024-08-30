@@ -1,28 +1,23 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from fastapi.responses import JSONResponse
 
+from services.hero_service import HeroService
+
 router = APIRouter()
 
 @router.get("")
 async def read_heroes(
-    is_active: bool = Query(...),
+    name: str = Query(...),
 ):
     """
         ## read heroes
     """
 
+    hero_service = HeroService(name)
+
     status_code = status.HTTP_200_OK
     message = 'OK'
-    datas = [
-        {
-            'id': 1,
-            'title': 'BT-001',
-        },
-        {
-            'id': 2,
-            'title': 'Zero Hawk Knight',
-        },
-    ]
+    datas = hero_service.hero_repository.get_static_data()
 
     response = {
         'status': status_code,
