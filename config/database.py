@@ -1,13 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
-from dotenv import dotenv_values
-
-config = dotenv_values()
-
-DATABASE_URL = config['DB']
+from config.config import config
 
 # Create the SQLAlchemy engine
-engine = create_engine(DATABASE_URL)
+engine = create_engine(config.DB)
 
 # Create a SessionLocal class for handling database sessions
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
